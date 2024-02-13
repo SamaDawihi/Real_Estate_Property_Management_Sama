@@ -28,7 +28,7 @@ class PropertyController extends Controller
      */
     public function store(StorePropertyRequest $request)
     {
-        return Property::create($request->all());
+        return new PropertyResource(Property::create($request->all()));
     }
 
     /**
@@ -46,7 +46,7 @@ class PropertyController extends Controller
     public function update(UpdatePropertyRequest $request, Property $property)
     {
         $property->update($request->all());
-        return $property;
+        return new PropertyResource($property);
 
     }
 
