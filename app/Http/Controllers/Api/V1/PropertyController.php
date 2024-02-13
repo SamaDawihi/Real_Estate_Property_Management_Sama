@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Property;
-use App\Http\Requests\StorePropertyRequest;
-use App\Http\Requests\UpdatePropertyRequest;
+use App\Http\Requests\V1\StorePropertyRequest;
+use App\Http\Requests\V1\UpdatePropertyRequest;
 
 class PropertyController extends Controller
 {
@@ -14,6 +14,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        //Get All Properties
         return Property::all();
     }
 
@@ -38,7 +39,8 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+        //Get Single Property
+        return $property;
     }
 
     /**
