@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\PropertyCollection;
+use App\Http\Resources\V1\PropertyResource;
 use App\Models\Property;
 use App\Http\Requests\V1\StorePropertyRequest;
 use App\Http\Requests\V1\UpdatePropertyRequest;
@@ -18,7 +20,7 @@ class PropertyController extends Controller
     {
         $filter = new PropertyFilter();
         $filterItems = $filter->transform($request);
-        return Property::where($filterItems)->paginate()->appends($request->query());
+        return new PropertyCollection(Property::where($filterItems)->paginate()->appends($request->query()));
     }
 
     /**
@@ -35,7 +37,7 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         //Get Single Property
-        return $property;
+        return new PropertyResource($property);
     }
 
     /**
