@@ -19,19 +19,11 @@ class PropertyController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StorePropertyRequest $request)
     {
-        //
+        return Property::create($request->all());
     }
 
     /**
@@ -44,19 +36,13 @@ class PropertyController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Property $property)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdatePropertyRequest $request, Property $property)
     {
-        //
+        $property->update($request->all());
+        return $property;
+
     }
 
     /**
@@ -64,6 +50,7 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        $property->delete();
+        return response()->json(['message' => 'Property deleted successfully']);
     }
 }
