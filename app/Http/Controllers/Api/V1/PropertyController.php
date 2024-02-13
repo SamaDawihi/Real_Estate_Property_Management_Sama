@@ -6,16 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Http\Requests\V1\StorePropertyRequest;
 use App\Http\Requests\V1\UpdatePropertyRequest;
+use Illuminate\Http\Request;
+use App\Filters\V1\PropertyFilter;
 
 class PropertyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //Get All Properties
-        return Property::all();
+        $filter = new PropertyFilter();
+        $filterItems = $filter->transform($request);
+        return Property::where($filterItems)->paginate()->appends($request->query());
     }
 
     /**

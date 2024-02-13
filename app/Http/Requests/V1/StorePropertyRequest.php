@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePropertyRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StorePropertyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,14 @@ class StorePropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'price' => ['required', 'numeric'],
+            'bedrooms' => ['required', 'integer'],
+            'bathrooms' => ['required', 'integer'],
+            'type' => ['required', Rule::in(['A', 'V', 'a', 'v'])],
+            'status'  => ['required', Rule::in(['A', 'S', 'a', 's'])],
+
         ];
     }
 }
