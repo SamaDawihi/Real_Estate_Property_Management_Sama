@@ -32,7 +32,8 @@ class UpdatePropertyRequest extends FormRequest
                 'bedrooms' => ['required', 'integer'],
                 'bathrooms' => ['required', 'integer'],
                 'type' => ['required', Rule::in(['A', 'V', 'a', 'v'])],
-                'status'  => ['required', Rule::in(['A', 'S', 'a', 's'])],            ];
+                'status'  => ['required', Rule::in(['A', 'S', 'a', 's'])],            
+            ];
         } else {
             return [
                 'title' => ['sometimes', 'required', 'string'],
